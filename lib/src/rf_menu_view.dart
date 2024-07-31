@@ -9,48 +9,41 @@ import 'package:rf_menu/src/click_feedback_container.dart';
 /// want to. Or, use the built-in [RfMenu] which handles these for you.
 abstract class RfMenuView extends StatelessWidget {
   final RfMenuData _menuData;
-  final Decoration? _menuDecoration;
 
   const RfMenuView({
     super.key,
     required RfMenuData menuData,
-    Decoration? menuDecoration,
-  })  : _menuData = menuData,
-        _menuDecoration = menuDecoration;
+  }) : _menuData = menuData;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: _menuDecoration,
-      child: ListView.separated(
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        itemCount: _menuData.menuItems.length + 1,
-        physics: const NeverScrollableScrollPhysics(),
-        separatorBuilder: (context, index) {
-          if (index == 0) return const SizedBox.shrink();
-          return separatorBuilder(
+    return ListView.separated(
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      itemCount: _menuData.menuItems.length + 1,
+      physics: const NeverScrollableScrollPhysics(),
+      separatorBuilder: (context, index) {
+        if (index == 0) return const SizedBox.shrink();
+        return separatorBuilder(
+          index - 1,
+          _menuData.menuItems.length,
+          _menuData.menuItems[index - 1],
+        );
+      },
+      itemBuilder: (context, index) {
+        if (index == 0) return menuHeaderBuilder();
+        return ClickFeedbackContainer(
+          child: menuItemBuilder(
             index - 1,
             _menuData.menuItems.length,
             _menuData.menuItems[index - 1],
-          );
-        },
-        itemBuilder: (context, index) {
-          if (index == 0) return menuHeaderBuilder();
-          return ClickFeedbackContainer(
-            child: menuItemBuilder(
-              index - 1,
-              _menuData.menuItems.length,
-              _menuData.menuItems[index - 1],
-            ),
-            onTap: () => onItemTap(
-              context,
-              _menuData.menuItems[index - 1],
-            ),
-          );
-        },
-      ),
+          ),
+          onTap: () => onItemTap(
+            context,
+            _menuData.menuItems[index - 1],
+          ),
+        );
+      },
     );
   }
 
@@ -92,7 +85,4 @@ abstract class RfMenuView extends StatelessWidget {
 
   /// ### The data of the current menu or submenu.
   RfMenuData get menuData => _menuData;
-
-  /// ### Optional decoration of the current menu.
-  Decoration? get menuDecoration => _menuDecoration;
 }

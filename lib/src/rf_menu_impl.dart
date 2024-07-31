@@ -4,20 +4,18 @@ import 'package:rf_menu/src/rf_menu_item_data.dart';
 import 'package:rf_menu/src/rf_menu_view.dart';
 
 /// ### Extend this class to create a menu that supports nested menus.
-/// This class handles auto popping of the current page holding the
-/// menu item that was clicked, and optionally requests for opening
-/// the submenu (if there is any).
+/// This class handles auto popping of the current page,
+/// and optionally requests for opening the submenu (if there is any).
 /// <br><br>
 /// If you do not want to handle auto popping and submenu routing,
 /// please use [RfMenuView]. This can be the case if you just want to
-/// create a menu view in a static screen or something like that.
+/// create a menu view in a static screen or fragment or something like that.
 abstract class RfMenu extends RfMenuView {
   final void Function(RfMenuData submenuData) _onSubmenuRequest;
 
   const RfMenu({
     super.key,
     required super.menuData,
-    required super.menuDecoration,
     required void Function(RfMenuData menuData) onSubmenuRequest,
   }) : _onSubmenuRequest = onSubmenuRequest;
 

@@ -68,7 +68,6 @@ abstract class RfMenuView extends StatelessWidget {
   );
 
   /// ### Build menu item separator widget.
-  ///
   Widget separatorBuilder(
     int index,
     int hostMenuSize,

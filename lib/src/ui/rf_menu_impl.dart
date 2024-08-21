@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rf_menu/src/rf_menu_data.dart';
-import 'package:rf_menu/src/rf_menu_item_data.dart';
-import 'package:rf_menu/src/rf_menu_view.dart';
+import 'package:rf_menu/src/models/rf_menu_data.dart';
+import 'package:rf_menu/src/models/rf_menu_item_data.dart';
+import 'package:rf_menu/src/ui/rf_menu_view.dart';
 
 /// ### Extend this class to create a menu that supports nested menus.
 /// This class handles auto popping of the current page,

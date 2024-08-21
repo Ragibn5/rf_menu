@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rf_menu/src/rf_menu_data.dart';
-import 'package:rf_menu/src/rf_menu_item_data.dart';
-import 'package:rf_menu/src/rf_menu_view.dart';
+import 'package:rf_menu/src/models/rf_menu_data.dart';
+import 'package:rf_menu/src/models/rf_menu_item_data.dart';
+import 'package:rf_menu/src/ui/rf_menu_view.dart';
 
 /// ### Extend this class to create a menu that supports nested menus.
 /// This class handles auto popping of the current page,
@@ -28,14 +28,4 @@ abstract class RfMenu extends RfMenuView {
       _onSubmenuRequest(itemData.subMenuData!);
     }
   }
-
-  /// ### The data of the current menu or submenu.
-  /// Be careful with the submenus. Submenus are also independent menus and
-  /// when one is opened from a parent menu (and that parent is popped and
-  /// submenu is pushed), this field will point to the data of the submenu,
-  /// NOT the original menu. This is true for any level of submenus.
-  /// In a nutshell, this field refers to the data of menu (or submenu)
-  /// that is currently visible.
-  @override
-  RfMenuData get menuData => super.menuData;
 }

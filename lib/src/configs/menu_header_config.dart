@@ -21,4 +21,18 @@ class MenuHeaderConfig implements PassthroughContract {
         menuIconData == null &&
         separatorPadding == null;
   }
+
+  MenuHeaderConfig copyWith({
+    String? menuTitle,
+    String? menuIconPath,
+    IconData? menuIconData,
+    EdgeInsets? separatorPadding,
+  }) {
+    return MenuHeaderConfig(
+      menuTitle: menuTitle ?? this.menuTitle,
+      menuIconPath: menuIconPath ?? this.menuIconPath,
+      menuIconData: menuIconData ?? this.menuIconData,
+      separatorPadding: separatorPadding ?? this.separatorPadding,
+    );
+  }
 }

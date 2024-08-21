@@ -10,4 +10,12 @@ class MenuBodyConfig implements PassthroughContract {
   bool isPassthrough() {
     return bodyPadding == null;
   }
+
+  MenuBodyConfig copyWith({
+    EdgeInsets? bodyPadding,
+  }) {
+    return MenuBodyConfig(
+      bodyPadding: bodyPadding ?? this.bodyPadding,
+    );
+  }
 }

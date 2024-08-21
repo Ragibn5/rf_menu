@@ -10,4 +10,13 @@ class MenuItemSeparatorConfig implements PassthroughContract {
   bool isPassthrough() {
     return menuItemSeparatorPadding == null;
   }
+
+  MenuItemSeparatorConfig copyWith({
+    EdgeInsets? menuItemSeparatorPadding,
+  }) {
+    return MenuItemSeparatorConfig(
+      menuItemSeparatorPadding:
+          menuItemSeparatorPadding ?? this.menuItemSeparatorPadding,
+    );
+  }
 }

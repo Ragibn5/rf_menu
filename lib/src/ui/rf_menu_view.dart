@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rf_menu/rf_menu.dart';
-import 'package:rf_menu/src/configs/menu_item_config.dart';
-import 'package:rf_menu/src/configs/menu_item_separator_config.dart';
 import 'package:rf_menu/src/ui/click_feedback_container.dart';
 
 /// ### Extend this class to create a non-nested menu page.
@@ -21,7 +19,7 @@ abstract class RfMenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
-      padding: _menuData.menuBodyConfig?.bodyPadding,
+      padding: _menuData.menuBodyConfig?.bodyPadding ?? EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: _menuData.menuItems.length + 1,
       separatorBuilder: (context, index) {
@@ -34,7 +32,9 @@ abstract class RfMenuView extends StatelessWidget {
         );
       },
       itemBuilder: (context, index) {
-        if (index == 0) return menuHeaderBuilder();
+        if (index == 0) {
+          return menuHeaderBuilder(config: _menuData.menuHeaderConfig);
+        }
         return ClickFeedbackContainer(
           child: menuItemBuilder(
             index: index - 1,
@@ -74,9 +74,9 @@ abstract class RfMenuView extends StatelessWidget {
   /// will have to use it yourself to make appropriate item UI, it is not
   /// applied automatically.
   Widget menuItemBuilder({
-    int index,
-    int hostMenuSize,
-    RfMenuItemData itemData,
+    required int index,
+    required int hostMenuSize,
+    required RfMenuItemData itemData,
     MenuItemConfig? itemConfig,
   });
 
@@ -86,9 +86,9 @@ abstract class RfMenuView extends StatelessWidget {
   /// will have to use it yourself to make appropriate separator UI, it is
   /// not applied automatically.
   Widget separatorBuilder({
-    int index,
-    int hostMenuSize,
-    RfMenuItemData itemData,
+    required int index,
+    required int hostMenuSize,
+    required RfMenuItemData itemData,
     MenuItemSeparatorConfig? separatorConfig,
   });
 
@@ -99,7 +99,4 @@ abstract class RfMenuView extends StatelessWidget {
   /// Note, the overrides of this method may handle auto popping.
   /// For example, the override within the [RfMenu] class handles auto popping.
   void onItemTap(BuildContext context, RfMenuItemData itemData);
-
-  /// ### The data of the current menu or submenu.
-  RfMenuData get menuData => _menuData;
 }
